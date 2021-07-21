@@ -1,38 +1,151 @@
 .App {
-  text-align: center;
+  width: 50%;
+  /* height: 100vh; */
+  background-color: #201F1F;
+  margin: auto;
+  border-radius: 10px;
+  color: #fff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.conteiner {
+  margin-top: 30px;
+  padding: 40px 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.conteiner-switch {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: flex-end;
+  width: 80%;
+  margin: auto;
 }
 
-.App-link {
-  color: #61dafb;
+.conteiner-pantalla {
+  width: 78%;
+  margin: auto;
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.conteiner-pantalla .operation {
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  font-size: 14px;
+}
+
+.conteiner-pantalla .pantalla {
+  width: 100%;
+  height: 60px;
+  margin: 15px 0;
+  padding: 0px;
+  background-color: rgba(104,104,104,57%);
+  color: #fff;
+  border-radius: 10px;
+  border: solid 2px #52FF00;
+  text-align: right;
+  font-size: 24px;
+  padding-right: 5px;
+  box-sizing: border-box;
+}
+.conteiner-pantalla .pantalla:hover {
+  background-color: #626262;
+}
+
+.conteiner-pantalla .pantalla:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+.teclados {
+  width: 80%;
+  margin: auto;
+}
+
+.button-calculator {
+  background-color: #424548;
+  margin: 3px;
+  border-radius: 5px;
+  border: 1px solid #52FF00;
+  text-align: center;
+  /* font-size: 20px; */
+}
+
+.button-calculator:hover {
+  cursor: pointer;
+  background-color: #626262;
+}
+
+.button-calculator p {
+  font-size: 18px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slide::before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+@media (max-width: 630px) {
+  .App {
+    width: 70%;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 375px) {
+  .App {
+    width: 90%;
   }
 }
