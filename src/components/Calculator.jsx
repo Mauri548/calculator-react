@@ -7,39 +7,44 @@ const Calculator = () => {
 
     const [operation,setOperation] = useState('')
     const [operation_aux,setOperationAux] = useState('')
-    // const [parentesis,setParentesis] = useState(false)
+    const [parentesis,setParentesis] = useState(0)
 
     const Add = (valor) => {
         setOperation(operation + valor)
 
-        // if (parentesis) {
-        //     setOperation(operation.substring(0, operation.length-1) + valor +
-        //     operation.substring(operation.length-1,operation.length))
-        // } else {
-        //     setOperation(operation + valor)
-        // }
+        if (parentesis > 0) {
+            setOperation(operation.substring(0, operation.length - parentesis) + valor +
+            operation.substring(operation.length - parentesis,operation.length))
+        } else {
+            setOperation(operation + valor)
+        }
     }
 
     const AddOperation = (valor) => {
-        setOperation(operation + ' ' + valor + ' ')
-        // if (valor == '(') {
-        //     setOperation(operation + ' ' + valor + ')')
-        //     setParentesis(true)
-        // } else if (valor == ')') {
-        //     setParentesis(false)
-        // } else {
-        //     if (parentesis) {
-        //         setOperation(operation.substring(0, operation.length-1) + ' ' + valor + ' ' +
-        //         operation.substring(operation.length-1,operation.length))
-        //     } else {
-        //         setOperation(operation + ' ' + valor + ' ')
-        //     }
-        // }
+        // setOperation(operation + ' ' + valor + ' ')
+        if (valor === '(') {
+            if (parentesis > 0) {
+                setOperation(operation.substring(0, operation.length - parentesis) + ' ' + valor + ')' +
+                operation.substring(operation.length - parentesis,operation.length))
+            } else {
+                setOperation(operation + ' ' + valor + ')')
+            }
+            setParentesis(parentesis + 1)
+        } else if (valor === ')') {
+            setParentesis(parentesis - 1)
+        } else {
+            if (parentesis > 0) {
+                setOperation(operation.substring(0, operation.length - parentesis ) + ' ' + valor + ' ' +
+                operation.substring(operation.length - parentesis,operation.length))
+            } else {
+                setOperation(operation + ' ' + valor + ' ')
+            }
+        }
 
     }
 
     const Delete = () => {
-        operation[operation.length-1] == ' ' ? setOperation(operation.substring(0,operation.length - 3))
+        operation[operation.length-1] === ' ' ? setOperation(operation.substring(0,operation.length - 3))
         : setOperation(operation.substring(0,operation.length - 1))  
     }
 
@@ -70,8 +75,8 @@ const Calculator = () => {
                 if (!multordiv) {
                     if (isNaN(arreglo[index+1])) {
 
-                        if (arreglo[index+1] == '×' || arreglo[index+1] == '÷') {
-                            arreglo[index+1] == '×' ? resultAux = element * arreglo[index+2]
+                        if (arreglo[index+1] === '×' || arreglo[index+1] === '÷') {
+                            arreglo[index+1] === '×' ? resultAux = element * arreglo[index+2]
                             : resultAux = element / arreglo[index+2] 
                             aux.push(resultAux)
                             i = index+1
@@ -84,25 +89,25 @@ const Calculator = () => {
                     }
                 } else {
                     console.log('i: ' + i + ' index: ' + index)
-                    if ((index != i) && (index != i+1)) {
+                    if ((index !== i) && (index !== i+1)) {
                         aux.push(element)
                     }
                 }
             })
             arreglo = aux
 
-            if ( (arreglo.find(element => element == '÷') == undefined) && (arreglo.find(element => element == '×') == undefined)) {
+            if ( (arreglo.find(element => element === '÷') === undefined) && (arreglo.find(element => element === '×') === undefined)) {
                 onlySuma = true
             }
         }
 
         arreglo.forEach((element, index) => {
-            if (index == 0) {
+            if (index === 0) {
                 calculo = element
             } else {
                 if (isNaN(element)) {
                     if (isNaN(element)) {
-                        element == '+' ? calculo = calculo + arreglo[index+1] : calculo = calculo - arreglo[index+1]
+                        element === '+' ? calculo = calculo + arreglo[index+1] : calculo = calculo - arreglo[index+1]
                     }
                 }
             }
